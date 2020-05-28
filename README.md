@@ -1,5 +1,7 @@
 # HummingBot with Peatio Adapter
 
+Assuming, that you have Docker installed https://docs.docker.com/get-docker/
+
 
 ## Getting Docker image
 
