@@ -15,9 +15,6 @@ If you want to pull latest version run following command:
 git pull gitlab.tunex.io:5050/trading-bot/hummingbot
 ```
 
-## Running bot
-
-
 ## Preparing barong api_keys
 
 1. Turn on 2FA for user
@@ -30,7 +27,7 @@ git pull gitlab.tunex.io:5050/trading-bot/hummingbot
 
 3. Save key and secret
 
-
+![add key](https://gitlab.tunex.io/trading-bot/hummingbot/-/raw/master/images/key.png)
 
 ## Global configurations
 
@@ -112,17 +109,60 @@ external_pricing_source: true
 external_price_source_type: exchange
 
 # An external exchange name (for external exchange pricing source)
+# IMPORTANT: this eschange must be have exactly exchange
 external_price_source_exchange: coinbase_pro
 
 # A base asset (for external feed pricing source), e.g. ETH
-external_price_source_feed_base_asset: ETH
+external_price_source_feed_base_asset:
 
 # A quote asset (for external feed pricing source), e.g. USD
-external_price_source_feed_quote_asset: EUR
+external_price_source_feed_quote_asset:
 
 # An external api that returns price (for external custom_api pricing source)
 external_price_source_custom_api:
 
 # Include orders that will immediately match on the exchange? (Default is False)
 include_matching_orders: true
+```
+
+## Creating configuration files
+
+1. Create directory:
+
+-- /pathTo/container_name
+    |
+    --- /conf
+    |
+    --- /data
+    |
+    --- /logs
+
+2. Run bot with keeping STDIN open and allocating a pseudo-TTY
+
+```
+docker run -it --name container_name \
+    --mount "type=bind,source=/pathTo/container_name/conf,destination=/conf/" \
+    --mount "type=bind,source=/pathTo/container_name/logs,destination=/logs/" \
+    --mount "type=bind,source=/pathTo/container_name/data,destination=/data/" \
+    gitlab.tunex.io:5050/trading-bot/hummingbot
+```
+
+3. In bot graphic interface enter ```config``` and input all parameters
+
+Important! Remember password which you input during configurating process
+
+## Running bot
+
+```
+docker run -itd \
+    -e STRATEGY="pure_market_making" \
+    -e CONFIG_FILE_NAME="conf_pure_market_making_strategy_0.yml" \
+    -e CONFIG_PASSWORD="password" \
+    --name container_name \
+    --mount "type=bind,source=/pathTo/container_name/conf,destination=/conf/" \
+    --mount "type=bind,source=/pathTo/container_name/logs,destination=/logs/" \
+    --mount "type=bind,source=/pathTo/container_name/data,destination=/data/" \
+    --restart "always" \
+    --log-opt max-size=10m --log-opt max-file=5 \
+    gitlab.tunex.io:5050/trading-bot/hummingbot
 ```
