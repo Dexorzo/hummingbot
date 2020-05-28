@@ -147,7 +147,7 @@ docker run -it --name container_name \
     gitlab.tunex.io:5050/trading-bot/hummingbot
 ```
 
-3. In bot graphic interface enter ```config``` and input all parameters
+3. In bot graphic interface enter ```config``` and input all param values
 
 Important! Remember password which you input during configurating process
 
