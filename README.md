@@ -129,6 +129,7 @@ include_matching_orders: true
 
 1. Create directory:
 
+```
 -- /pathTo/container_name
     |
     --- /conf
@@ -136,6 +137,7 @@ include_matching_orders: true
     --- /data
     |
     --- /logs
+```
 
 2. Run bot with keeping STDIN open and allocating a pseudo-TTY
 
