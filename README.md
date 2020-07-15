@@ -1,4 +1,4 @@
-# HummingBot with Peatio Adapter
+# HummingBot with Peatio Adapter v.0.28
 
 Assuming, that you have Docker installed https://docs.docker.com/get-docker/
 
@@ -15,6 +15,80 @@ If you want to pull latest version run following command:
 
 ```
 docker pull gitlab.tunex.io:5050/trading-bot/hummingbot
+```
+
+## Preparing barong api_keys
+
+1. Turn on 2FA for user
+
+![2FA](https://gitlab.tunex.io/trading-bot/hummingbot/-/raw/master/images/profile.png)
+
+2. Add new api_key
+
+![add key](https://gitlab.tunex.io/trading-bot/hummingbot/-/raw/master/images/keys.png)
+
+3. Save key and secret
+
+![add key](https://gitlab.tunex.io/trading-bot/hummingbot/-/raw/master/images/key.png)
+
+## Connect bot to openware
+
+1. Create directories for configuration's, database's and log's file:
+
+```
+mkdir logs
+mkdir conf
+mkdir data
+```
+
+2. Start bot for manage secure configuration:
+
+```
+docker run -it --name container_name \
+    --mount "type=bind,source=/pathTo/container_name/conf,destination=/conf/" \
+    --mount "type=bind,source=/pathTo/container_name/logs,destination=/logs/" \
+    --mount "type=bind,source=/pathTo/container_name/data,destination=/data/" \
+    gitlab.tunex.io:5050/trading-bot/hummingbot
+```
+
+3. Using command ```connect openware``` add api key and api/ranger urls in configuration. Close hummingbot ```exit``` and remove docker container ```docker rm container_name```.
+
+4. Change with your data and copy conf_global.yml and conf_pure_market.yml in conf directory [templates](https://gitlab.tunex.io/trading-bot/hummingbot/-/tree/master/templates/conf_0.28)
+
+## Running resulting bot
+
+```
+docker run -itd \
+    -e STRATEGY="pure_market_making" \
+    -e CONFIG_FILE_NAME="conf_pure_market.yml" \
+    -e CONFIG_PASSWORD="password" \
+    --name container_name \
+    --mount "type=bind,source=/pathTo/container_name/conf,destination=/conf/" \
+    --mount "type=bind,source=/pathTo/container_name/logs,destination=/logs/" \
+    --mount "type=bind,source=/pathTo/container_name/data,destination=/data/" \
+    --restart "always" \
+    --log-opt max-size=10m --log-opt max-file=5 \
+    gitlab.tunex.io:5050/trading-bot/hummingbot
+```
+
+
+# HummingBot with Peatio Adapter v.0.22
+
+Assuming, that you have Docker installed https://docs.docker.com/get-docker/
+
+
+## Getting Docker image
+
+Login to private Docker registry first using your Gitlab account credentials:
+
+```
+docker login gitlab.tunex.io:5050
+```
+
+If you want to pull latest version run following command:
+
+```
+docker pull gitlab.tunex.io:5050/trading-bot/hummingbot:0.22
 ```
 
 ## Preparing barong api_keys
@@ -148,7 +222,7 @@ docker run -it --name container_name \
     --mount "type=bind,source=/pathTo/container_name/conf,destination=/conf/" \
     --mount "type=bind,source=/pathTo/container_name/logs,destination=/logs/" \
     --mount "type=bind,source=/pathTo/container_name/data,destination=/data/" \
-    gitlab.tunex.io:5050/trading-bot/hummingbot
+    gitlab.tunex.io:5050/trading-bot/hummingbot:0.22
 ```
 
 3. In bot graphic interface enter ```config``` and input all param values
@@ -168,5 +242,5 @@ docker run -itd \
     --mount "type=bind,source=/pathTo/container_name/data,destination=/data/" \
     --restart "always" \
     --log-opt max-size=10m --log-opt max-file=5 \
-    gitlab.tunex.io:5050/trading-bot/hummingbot
+    gitlab.tunex.io:5050/trading-bot/hummingbot:0.22
 ```
