@@ -1,0 +1,87 @@
+#################################
+###   Global configurations   ###
+#################################
+
+# For more detailed information: https://docs.hummingbot.io
+template_version: 3
+
+# Exchange configs
+bamboo_relay_use_coordinator: false
+bamboo_relay_pre_emptive_soft_cancels: false
+
+openware_api_url: https://dev.tunex.io/api/v2/peatio
+openware_ranger_url: wss://dev.tunex.io/api/v2/ranger
+trading_pair_splitter: ETH|USD
+
+ethereum_rpc_url:
+ethereum_chain_name: MAIN_NET
+ethereum_token_overrides: {}
+
+# Kill switch
+kill_switch_enabled: false
+## The rate of performance at which you would want the bot to stop trading (-0.2 = 20%)
+kill_switch_rate:
+
+# Paper Trading
+paper_trade_enabled: false
+paper_trade_account_balance:
+- - USDT
+  - 1000
+- - ONE
+  - 1000
+- - USDQ
+  - 1000
+- - TUSD
+  - 1000
+- - ETH
+  - 10
+- - WETH
+  - 10
+- - USDC
+  - 1000
+- - DAI
+  - 1000
+
+# Telegram integration
+telegram_enabled: false
+telegram_token:
+telegram_chat_id:
+
+# Exchange rate
+exchange_rate_default_data_feed: coin_gecko_api
+exchange_rate_conversion:
+- - USD
+  - 1.0
+  - manual
+- - DAI
+  - 1.0
+  - coin_gecko_api
+- - USDT
+  - 1.0
+  - coin_gecko_api
+- - USDC
+  - 1.0
+  - coin_gecko_api
+- - TUSD
+  - 1.0
+  - coin_gecko_api
+exchange_rate_fetcher:
+- - ETH
+  - coin_gecko_api
+- - DAI
+  - coin_gecko_api
+client_id: 99ddf2afa3fffb37f7ea95c0f22bb4dacb7c17c7
+log_level: INFO
+debug_console: false
+strategy_report_interval: 900.0
+reporting_aggregation_interval: 60.0
+reporting_log_interval: 60.0
+logger_override_whitelist:
+- hummingbot.strategy.arbitrage
+- hummingbot.strategy.cross_exchange_market_making
+- conf
+key_file_path: conf/
+log_file_path: logs/
+on_chain_cancel_on_exit: false
+
+
