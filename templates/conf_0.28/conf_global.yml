@@ -9,8 +9,8 @@ template_version: 8
 bamboo_relay_use_coordinator: false
 bamboo_relay_pre_emptive_soft_cancels: false
 
-openware_api_url: https://aryacoin.openware.work/api/v2/peatio
-openware_ranger_url: wss://aryacoin.openware.work/api/v2/ranger
+openware_api_url: https://dev.tunex.io/api/v2/peatio
+openware_ranger_url: wss://dev.tunex.io/api/v2/ranger
 openware_currencies: ETH|USD
 
 celo_address:
